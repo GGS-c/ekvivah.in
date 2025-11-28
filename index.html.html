@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riya & Arjun - We're Getting Married!</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts: Playfair Display (Regal Display) and Lora (Clean Serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <!-- Load Lucide Icons for aesthetic symbols -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Custom Tailwind Configuration */
+        :root {
+            --color-primary: #800000; /* Deep Maroon */
+            --color-secondary: #005D5D; /* Emerald Green */
+            --color-base: #F4EADF; /* Muted Gold/Champagne */
+            --color-card: #FFFFF0; /* Cream/Ivory */
+        }
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Lora', serif; }
+        .bg-base { background-color: var(--color-base); }
+        .text-primary { color: var(--color-primary); }
+        .text-secondary { color: var(--color-secondary); }
+        .border-primary { border-color: var(--color-primary); }
+        .bg-primary { background-color: var(--color-primary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .hover\:bg-primary-dark:hover { background-color: #660000; }
+
+        /* Jali Work (Paisley) Pattern Overlay for Traditional Aesthetic */
+        .jali-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e8dacb' fill-opacity='0.6'%3E%3Cpath d='M30 60a30 30 0 1 1 0-60 30 30 0 0 1 0 60zm0-4c14.359 0 26-11.641 26-26S44.359 4 30 4 4 15.641 4 30s11.641 26 26 26zM30 52a22 22 0 1 1 0-44 22 22 0 0 1 0 44zM30 48a18 18 0 1 1 0-36 18 18 0 0 1 0 36zM30 40a10 10 0 1 1 0-20 10 10 0 0 1 0 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-size: 150px 150px;
+        }
+
+        /* Smooth Scroll */
+        html { scroll-behavior: smooth; }
+
+        /* Keyframe for subtle hero animation (gentle zoom) */
+        @keyframes subtle-zoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        .hero-img {
+            animation: subtle-zoom 20s ease-in-out infinite alternate;
+        }
+
+        /* Timeline style */
+        .timeline-item { position: relative; padding-left: 2rem; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--color-primary); /* Gold Chain/Line */
+            z-index: 10;
+        }
+        .timeline-item:last-child::before {
+            height: 50%; /* Stop the line halfway for the last element */
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 1.5rem;
+            width: 1.5rem;
+            border-radius: 50%;
+            background-color: var(--color-card);
+            border: 3px solid var(--color-secondary);
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+<body class="bg-base font-body jali-bg text-gray-800">
+
+    <!-- Navbar (Sticky) -->
+    <nav id="nav" class="sticky top-0 z-50 bg-card/95 backdrop-blur-sm shadow-lg border-b border-primary/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo/Title -->
+                <div class="flex-shrink-0">
+                    <a href="#home" class="font-display text-2xl sm:text-3xl text-primary tracking-widest">
+                        R & A
+                    </a>
+                </div>
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="text-secondary hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition duration-300">Home</a>
+                        <a href="#story" class="text-secondary hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition duration-300">Our Story</a>
+                        <a href="#gallery" class="text-secondary hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition duration-300">Gallery</a>
+                        <a href="#details" class="text-secondary hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition duration-300">Details</a>
+                        <a href="#rsvp" class="bg-primary text-card hover:bg-primary-dark px-4 py-2 rounded-full text-sm font-medium transition duration-300 shadow-md">RSVP / Wishes</a>
+                    </div>
+                </div>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" type="button" class="md:hidden text-primary hover:text-secondary p-2 rounded-md transition duration-300">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <!-- ADJUSTED: Increased padding (py-3) and text size (text-lg) for better touch accessibility on mobile -->
+            <div class="px-2 pt-2 pb-3 space-y-2 sm:px-3"> 
+                <a href="#home" class="text-secondary hover:bg-base hover:text-primary block px-3 py-3 rounded-md text-lg font-medium">Home</a>
+                <a href="#story" class="text-secondary hover:bg-base hover:text-primary block px-3 py-3 rounded-md text-lg font-medium">Our Story</a>
+                <a href="#gallery" class="text-secondary hover:bg-base hover:text-primary block px-3 py-3 rounded-md text-lg font-medium">Gallery</a>
+                <a href="#details" class="text-secondary hover:bg-base hover:text-primary block px-3 py-3 rounded-md text-lg font-medium">Details</a>
+                <a href="#rsvp" class="bg-primary/10 text-primary block px-3 py-3 rounded-md text-lg font-medium">RSVP / Wishes</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Home Section (Hero) -->
+        <section id="home" class="relative overflow-hidden pt-20 md:pt-0">
+            <div class="h-[70vh] md:h-screen w-full relative">
+                <!-- Hero Image with subtle zoom animation -->
+                <!-- 🖼️ IMAGE LOCATION 1: HERO BACKGROUND IMAGE -->
+                <img src="https://petite-rose-ij0wbzv3wa-3quib7tihx.edgeone.dev/Element-back.jpg" alt="Riya and Arjun Couple Portrait" class="hero-img absolute inset-0 w-full h-full object-cover opacity-70">
+                <!-- Overlay Content -->
+                <div class="absolute inset-0 bg-primary/20 flex flex-col justify-center items-center text-center p-4">
+                    <p class="text-card font-body text-xl md:text-2xl mb-2 italic drop-shadow-lg">By the grace of God and our families,</p>
+                    <h1 class="font-display text-card text-5xl md:text-8xl leading-tight drop-shadow-2xl">
+                        Riya <span class="text-secondary">&</span> Arjun
+                    </h1>
+                    <h2 class="font-body text-card text-2xl md:text-4xl mt-2 drop-shadow-xl">
+                        Are Getting Married!
+                    </h2>
+                    <p class="text-card font-body text-lg md:text-xl mt-4 drop-shadow-lg max-w-xl">
+                        Join us as we celebrate our love and begin our forever.
+                    </p>
+
+                    <!-- Countdown Timer -->
+                    <div id="countdown" class="mt-8 flex space-x-4 md:space-x-8 text-card drop-shadow-xl">
+                        <div class="flex flex-col items-center">
+                            <span class="font-display text-4xl md:text-6xl" id="days">00</span>
+                            <span class="text-sm md:text-lg text-secondary/90">Days</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="font-display text-4xl md:text-6xl" id="hours">00</span>
+                            <span class="text-sm md:text-lg text-secondary/90">Hours</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="font-display text-4xl md:text-6xl" id="minutes">00</span>
+                            <span class="text-sm md:text-lg text-secondary/90">Minutes</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="font-display text-4xl md:text-6xl" id="seconds">00</span>
+                            <span class="text-sm md:text-lg text-secondary/90">Seconds</span>
+                        </div>
+                    </div>
+
+                    <a href="#details" class="mt-10 bg-secondary text-card font-display text-lg py-3 px-8 rounded-full shadow-xl hover:bg-primary transition duration-500 transform hover:scale-105">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section id="story" class="py-16 md:py-24 bg-card">
+            <div class="max-w-5xl mx-auto px-4 text-center">
+                <h2 class="font-display text-4xl md:text-5xl text-primary mb-12">Our Journey</h2>
+
+                <!-- Story Timeline Layout -->
+                <div class="grid md:grid-cols-2 gap-12 text-left">
+                    <!-- Milestone 1: How We Met -->
+                    <div class="p-6 rounded-xl bg-base/50 shadow-lg" data-aos="fade-right">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <i data-lucide="heart" class="w-6 h-6 text-secondary"></i>
+                            <h3 class="font-display text-2xl text-secondary">The First Meeting (2018)</h3>
+                        </div>
+                        <p class="font-body text-gray-700">
+                            Our story began serendipitously during a family function. Arjun's quick wit and Riya's infectious laughter created an instant connection that went beyond formal introductions. What started as stolen glances turned into late-night conversations and the realization that we shared a common vision for life.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <!-- 🖼️ IMAGE LOCATION 2: OUR STORY IMAGE 1 (MEETING) -->
+                        <img src="https://level-blue-b9ofmtr7mr-ecbbhur9tu.edgeone.dev/Element-4.jpg" alt="First Meeting" class="rounded-lg shadow-xl border-4 border-secondary/50 w-full md:w-auto transform transition duration-500 hover:rotate-1 hover:scale-105">
+                    </div>
+
+                    <!-- Decorative Divider -->
+                    <div class="md:col-span-2 my-8 h-px bg-primary/30 relative flex justify-center items-center">
+                        <i data-lucide="lamp-ceiling" class="w-8 h-8 text-primary bg-card p-1 rounded-full absolute -top-4"></i>
+                    </div>
+
+                    <!-- Milestone 2: The Proposal -->
+                    <div class="flex items-center justify-center order-2 md:order-none">
+                        <!-- 🖼️ IMAGE LOCATION 3: OUR STORY IMAGE 2 (PROPOSAL) -->
+                        <img src="https://dark-coffee-6rwhsnwif6-t65xpfjgad.edgeone.dev/Element-2.jpg" alt="The Proposal" class="rounded-lg shadow-xl border-4 border-secondary/50 w-full md:w-auto transform transition duration-500 hover:-rotate-1 hover:scale-105">
+                    </div>
+                    <div class="p-6 rounded-xl bg-base/50 shadow-lg order-1 md:order-none" data-aos="fade-left">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <i data-lucide="gem" class="w-6 h-6 text-secondary"></i>
+                            <h3 class="font-display text-2xl text-secondary">The Forever Ask (2024)</h3>
+                        </div>
+                        <p class="font-body text-gray-700">
+                            Arjun planned a beautiful surprise at a family retreat in the mountains. Surrounded by twinkling lights and the blessings of the night sky, he asked Riya to be his partner forever. It was a moment steeped in tradition, faith, and overwhelming joy, sealing our commitment to a lifelong journey together.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-16 md:py-24 bg-base">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <h2 class="font-display text-4xl md:text-5xl text-primary mb-12">Cherished Moments</h2>
+
+                <!-- Couple's Gallery Carousel -->
+                <div class="bg-card p-6 rounded-xl shadow-2xl mb-16">
+                    <h3 class="font-display text-3xl text-secondary mb-6 border-b border-primary/20 pb-3">Our Love Story</h3>
+                    <div id="carousel" class="relative overflow-hidden rounded-lg">
+                        <div class="flex transition-transform duration-700 ease-in-out" id="carousel-track">
+                            <!-- 🖼️ IMAGE LOCATION 4: CAROUSEL IMAGE 1 -->
+                            <img src="https://permanent-blush-50brjgncmc-fr7vjiru5f.edgeone.dev/Element-1.jpg" class="w-full flex-shrink-0 object-cover h-96" alt="Couple image 1">
+                            <!-- 🖼️ IMAGE LOCATION 5: CAROUSEL IMAGE 2 -->
+                            <img src="https://dark-coffee-6rwhsnwif6-t65xpfjgad.edgeone.dev/Element-2.jpg" class="w-full flex-shrink-0 object-cover h-96" alt="Couple image 2">
+                            <!-- 🖼️ IMAGE LOCATION 6: CAROUSEL IMAGE 3 -->
+                            <img src="https://straight-copper-xamlwiellh-sko2pyaazd.edgeone.dev/Element-3.jpg" class="w-full flex-shrink-0 object-cover h-96" alt="Couple image 3">
+                        </div>
+                        <!-- Navigation Buttons -->
+                        <button onclick="moveCarousel(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/30 text-white p-3 rounded-r-lg hover:bg-black/50 transition"><i data-lucide="chevron-left"></i></button>
+                        <button onclick="moveCarousel(1)" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/30 text-white p-3 rounded-l-lg hover:bg-black/50 transition"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Groom's and Bride's Mini Galleries -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-card p-6 rounded-xl shadow-xl">
+                        <h4 class="font-display text-2xl text-primary mb-4 border-b border-secondary/20 pb-2">The Groom: Arjun</h4>
+                        <div class="grid grid-cols-3 gap-3">
+                            <!-- 🖼️ IMAGE LOCATION 7: GROOM IMAGE 1 -->
+                            <img src="https://lh3.googleusercontent.com/rd-gg-dl/ABS2GSmuKPYls7pLMm2HwBHt1h2QvPNQtqE8SFZSKqQrOcyO0gFT0yFZfs_8vZMHUeSvA1Xs8bsM1n6oVzE10LMsmCfX5rMbKq1Qa3BwcbjurQ3TH_kCE31YoWeQ_KiirW9DEW-tnihlFCY76LAhBOBhMGBo8LYw3oOStBLv_toDGPMFImiGYNVAxwYqj6LM_Tytp_RzzZpGCtFZEK3F59OlKXv8dfIuO4cvUd3dWg8urqFmZzDZJd0o7yoOxUy6V9ifvxWugey5Mb39AbrLzRn8SXTr9KfPl9_6jsenhcnzF5p0ZDHdOu9xR5p4SBaO_S-ltSWJnovsUyLjzQbQkcsa694vpl5KsiT7c_kKgQwg3blDaantRzWYfyuKDGX6pEfFcY1evlXsr5Hcn_nUuNGoKTtlz9syeJcTNZpznszJxMvY7ot1nv_ZEuKsBlkmGpfHnhaZ6nBx4Lq8XP_kpVcsAWUsBx9rpka-rkpg8vLoEZ8LQURdRBjvdg8FxnRKBs8YCF-YjwYQbD_mG4WHYBPjrhIVdG1cagQRFPZ9ouBySCJpguZx5dz12QHxOreOyW-XhlNnOqW_PxY5kEUcWLUiTySFCF2yGK99SqBQNfkaDH8IJSqwsmaGTtVmyMUofqOglESRvNfnVRQTSuxa2_lJzh2XC1gP3Adq9o5bkEnyZkRBMn3PT3byPgpE1O3uuhb6U-Llyx4021gjWwr0lBL3T1w38sXGVgT4bZsZ8ssNJfSjcdsCxBG7PCZpjfg8E_RZ5ep3vIsnKBQEJQR5uF3CbDQs98JynS8WLWxeK4JgfW9FdXD4pfoNUZ0dxmyBIloPSbxKF7m6TU99MFW-Yq2x0lpt1aZImEY2xl1RsXSQLWQlp_aMtMqXsQwvuYnyQNuzQsyfoImRCk_LRwvGRyNd6DHmnZYh6iFKtCN6onaaYBa9Qss7-K4yPl2OVVAB_FmATrFqAaq-wl5WqvOVhUo_VvE_8UFuNmZaI6o_C3bvnmkm6hinlB_eb_O_oqBK8eXOJ0FYlUFmxgXLWHD4UidLTfO5IHcBH2zmANVtYkNmOtaKs3xWvdHmcEeKCfhCWNpHt3nfsA9JU18fGPq1DMMXuAA9p7AErm6im4DomMK2HjWdTQXfw1SA-M0lWHuwYc1iPeZGOQsVoag6lBTBZ7K1HyXl1DlesrPPtpU_MGDpqdPrEXtf1uoKeqeDDAOcCJFAjjn082LhjD7fh5t61oX8yHtqqQ02=s1024-rj" class="w-full h-auto rounded-lg shadow-md hover:scale-105 transition duration-300" alt="Groom 1">
+                            <!-- 🖼️ IMAGE LOCATION 8: GROOM IMAGE 2 -->
+                            <img src="https://lh3.googleusercontent.com/rd-gg-dl/ABS2GSkral2sXp6ShB_Z00n8FUBqXUYjhYkEManGyMZDeboiymNv-T5dteL8C8FcAeJ9ooIpkfoVBlBNc6YtICHqsiGgw6u_5QioxmzO-bUYAFdGu8JPUBcSL1ZkLGhGAb4PsMVBb4fvIQ3U1iBzfsPzsB5ngdGH02VAGmmrCS_wjE0WlPbnfUfc2YVRZjF8s1L_tRHue1Hj3HdhMByhoKbD4M-mgPjq-VYOIkWJfs8ohSuH_wWXn8V1iHcvWKaiLn7OVrz83IhYg7mhKnjkBIvi9a0GQ4pDFWQ_uJGBNN-H_Htbg_jGrgH5lbPCQI1hv_lB8d1DKd0w048OVLkIKI9_4Ze9pJob2XiykMNE-v2I1PbhgDGdeDPDBLkxB254yObcrEGxtjhzhM0toa7rjbMTs1yM0lvB-H8nUN-ChW4oqiGhOK9NR3Kxjs1v8UBR2kOlRJrBAWj6MxsV5YeKBaWFkP8xw9ZkDqXtVIH1EcZHg_qDerHjmxpPun858hJ1cMdGCPQ8jeIFHEi4majjBSY6dkl01oCbxZ3FrddbkrV1kjifz_YxZY4yGrbX1L2ESBsdI8nzEVThyBhqSklPglbAo0jg4XHv94AmC54S5_RiqLpTDFfcCzHpdfVAOILhU_Kk3M_m9q5j-Kd-Wc7aKMgQhJOCZ_9kRMBhYBJU8dhfCFeLEHnCT5TIXxOK0JZ3XKDgGMAf69XR2_-qTv2CnzT8U37xImCSCGuMaMqyuiwuMCohua_68n2xzEM5zIRctaLj4ut-8fXioye-ETJOyQG3jLbY9glPLZtySGRNeFWgReatAws0C-B0A_A44BiiawtVpZCadYe-9FiwZt18-FN8ph7sAHw0n2wIFPBr63B5fxFDh7E0oi_Py_sAAbgEP56-XbpJRTgX9gtyxHY9pD_PpwDbIyjX7mirMt93DhYapP1zyQVEKNJz_mN8ziWssHP7tlESkgkLLQAhuSDPApOy2mbfJsoUSHiNuS3M7UcOSa5LezY66YoxT2Au4AJpstVgemo-xAJoD1iv-0jxP8G1mn598xCn7Ad2EMZGEhAXuKlFwC5lC6Z2FKnfzs_p2Gz9SWCXgCA07XF4eyGUqAw6Pd6brsHa25vEEA-5NSLbphu0jV9_gKFhlvMHHKzTWUcB7MvQCPnlVG5wn_WuCdtRVxY2o6bYcPeGbueDpoXWnRcHZpIFvKz0jmmdyvqlFL0PnXUextq8HVvcjbEUheZ65h5cUoOb=s1024-rj" class="w-full h-auto rounded-lg shadow-md hover:scale-105 transition duration-300" alt="Groom 2">
+                            <!-- 🖼️ IMAGE LOCATION 9: GROOM IMAGE 3 -->
+                            <img src="https://modernwedding.com.au/wp-content/uploads/2018/05/21/Wedding_120.jpg" class="w-full h-auto rounded-lg shadow-md hover:scale-105 transition duration-300" alt="Groom 3">
+                        </div>
+                    </div>
+                    <div class="bg-card p-6 rounded-xl shadow-xl">
+                        <h4 class="font-display text-2xl text-primary mb-4 border-b border-secondary/20 pb-2">The Bride: Riya</h4>
+                        <div class="grid grid-cols-3 gap-3">
+                            <!-- 🖼️ IMAGE LOCATION 10: BRIDE IMAGE 1 -->
+                             
+                            <img src="https://lh3.googleusercontent.com/rd-gg-dl/ABS2GSnwZWNGwh6wV31Gui5zeKEhJzGK97ML1tvdZMqodXuL2VoMOl_5hpWI15WHwgME8ZgwjsThRyig5bivaXoyai0sMCK0xwAFKgO_9IxcfjagDIEJFFwkOaKlDSm0WjUtR1twAoQ2Jcwspf94QYdgHILCOXnFfgkcMGWgunZ9e_3MvWINPmYm7ZRYAjbp8RpJVW2PfkLUImSjGv2D-ZuQ4jgBHLRqVAGssExx6gZ95EEWm6HHN9y-kPqpczLlZF6OePkeEb2wHQ2IHE5RoaDeNIvMAmZFml-Ttibu609zJhchJ1Ts8WrR3kjreAH84fkR1nskwF51NI7fCxJ5IVysQNgDZ8MBCnFgfljf0B4uLM6ibb1XMUEkeKgCVtSB1cWCGZMiAZDXo0w4fwdDexOQa_bAnjV0uzcajJMRxN0JMZnWIjV3FU_EBlKHBmpJ_XwbWOsULay-AWPvLs7WFCkLXebH2fNDDc40d2K6Om-HxX4DXMjIBR0fTGcKOSmR89-01vjTOP7YW34aJ6zVDypjW_0BOFAgVoA_ABVczVmMS_I_AK9s-rUYYuLKg1SxUSNPH-JlxEbWQmP7eXLgMhA6pg7HKp3yQ_OtZYYLxmy9DcqFveGqnIh6Ddn4Wa8WqHFKQLJoZVfqcK1k4fCE016J7SMIcekBzHfqkm7irMU6HZiQvO_YPEomqxfsIpf_4NEAGO4KyU6YVbE-dHDhTWoWEiae3b9vuT6uYM218lj5iXoThvO2oyyy8sI7QfT6wAzQeFvtnKWM6JE_pk1SIQaiGrLwgWB0RIrKmrb1CJ5GAWnlgKVdDfGYFuroMwMTl1ET3ZLMhFSfAq6S4mmdVFjQj_up62Tnxi5esOO1XOfM1IDeo5bguS2m4CDZoAN50msvNUCrXnCmxadSP27PAe4JrlrB7WzKOTBT8DQJd3tdV98EvOxj1cMSO4tvUL-bC041-jY6_IIfSU63L5QF_g5SB0jcJdCNPvM2Pylwfdcc4-AeQ70ZZynPtIKcQ2aU8TV2s0dfteSph3buOFsjM0sIgRVO1nDAKOrhO830VZBqHcJj0Re1ieYI4yfBygsiZTmZp19PunYAD23Uzvarq9xyKk8TJI9lPaAjnet4Sk-gn5L9WjFZ7Lz4JULyAl1YlsQx3VL-45F2fNGtNnYdnAhZuTHjDRtbbO9nJhK8fjNx8sc_IIOD4YbrHcIwk9TM1Q9t2Hr2fTSKHtaFrEUxPiwGnxF0pEiH=s1024-rj" class="w-full h-auto rounded-lg shadow-md hover:scale-105 transition duration-300" alt="Bride 1">
+                            <!-- 🖼️ IMAGE LOCATION 11: BRIDE IMAGE 2 -->
+                            <img src="https://dark-coffee-6rwhsnwif6-t65xpfjgad.edgeone.dev/Element-2.jpg" class="w-full h-auto rounded-lg shadow-md hover:scale-105 transition duration-300" alt="Bride 2">
+                            <!-- 🖼️ IMAGE LOCATION 12: BRIDE IMAGE 3 -->
+                            <img src="https://straight-copper-xamlwiellh-sko2pyaazd.edgeone.dev/Element-3.jpg" class="w-full h-auto rounded-lg shadow-md hover:scale-105 transition duration-300" alt="Bride 3">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Wedding Details Section -->
+        <section id="details" class="py-16 md:py-24 bg-card">
+            <div class="max-w-5xl mx-auto px-4">
+                <h2 class="font-display text-4xl md:text-5xl text-primary text-center mb-12">The Celebration</h2>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Date, Time & Venue -->
+                    <div class="p-6 rounded-xl bg-base/50 shadow-xl border-l-4 border-primary">
+                        <h3 class="font-display text-3xl text-secondary mb-4">Date & Venue</h3>
+
+                        <div class="mb-6">
+                            <p class="text-primary font-display text-2xl mb-1">Wedding Muhurat</p>
+                            <p class="font-display text-5xl text-primary leading-tight">December 25, 2025</p>
+                            <p class="font-body text-xl">Starting at 10:00 AM IST</p>
+                        </div>
+
+                        <div class="mt-8">
+                            <p class="text-primary font-display text-2xl mb-1">Venue</p>
+                            <p class="font-display text-3xl text-secondary">The Royal Palace Banquet Hall</p>
+                            <p class="font-body text-lg">123 Tradition Road, Heritage City, MA 01234</p>
+                            <p class="font-body text-sm mt-2 text-gray-600">Landmark: Opposite the ancient Shiva Temple.</p>
+                        </div>
+                        
+                        <div class="mt-8 text-center bg-base p-4 rounded-lg">
+                            <p class="font-display text-2xl text-primary mb-2">Attire</p>
+                            <p class="font-body text-lg text-gray-700">Traditional Indian or Formal Western Wear.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Schedule of Events (Timeline) -->
+                    <div class="p-6 rounded-xl bg-base/50 shadow-xl border-l-4 border-secondary">
+                        <h3 class="font-display text-3xl text-primary mb-6">Schedule of Events</h3>
+                        
+                        <div class="space-y-8">
+                            <!-- Event 1 -->
+                            <div class="timeline-item">
+                                <div class="timeline-dot">
+                                    <i data-lucide="tent" class="w-4 h-4 text-primary"></i>
+                                </div>
+                                <div class="ml-8">
+                                    <p class="font-display text-xl text-secondary">Pre-Wedding Puja</p>
+                                    <p class="font-body text-sm text-gray-600">December 24th, 6:00 PM</p>
+                                    <p class="font-body text-base mt-1">A private family ceremony to seek blessings.</p>
+                                </div>
+                            </div>
+                            <!-- Event 2 -->
+                            <div class="timeline-item">
+                                <div class="timeline-dot">
+                                    <i data-lucide="flame" class="w-4 h-4 text-primary"></i>
+                                </div>
+                                <div class="ml-8">
+                                    <p class="font-display text-xl text-secondary">Varmala & Ceremony</p>
+                                    <p class="font-body text-sm text-gray-600">December 25th, 10:00 AM</p>
+                                    <p class="font-body text-base mt-1">The main wedding ceremony and sacred vows.</p>
+                                </div>
+                            </div>
+                            <!-- Event 3 -->
+                            <div class="timeline-item">
+                                <div class="timeline-dot">
+                                    <i data-lucide="glass-water" class="w-4 h-4 text-primary"></i>
+                                </div>
+                                <div class="ml-8">
+                                    <p class="font-display text-xl text-secondary">Cocktails & Appetizers</p>
+                                    <p class="font-body text-sm text-gray-600">December 25th, 1:00 PM</p>
+                                    <p class="font-body text-base mt-1">Light refreshments and social hour.</p>
+                                </div>
+                            </div>
+                            <!-- Event 4 -->
+                            <div class="timeline-item">
+                                <div class="timeline-dot">
+                                    <i data-lucide="chevrons-right" class="w-4 h-4 text-primary"></i>
+                                </div>
+                                <div class="ml-8">
+                                    <p class="font-display text-xl text-secondary">Reception & Dinner</p>
+                                    <p class="font-body text-sm text-gray-600">December 25th, 7:00 PM</p>
+                                    <p class="font-body text-base mt-1">A grand celebration with music and dinner.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map -->
+                    <div class="md:col-span-2 mt-8 bg-base/50 p-6 rounded-xl shadow-xl">
+                        <h3 class="font-display text-2xl text-secondary mb-4">Location Map</h3>
+                        <!-- Embedded Google Map -->
+                        <div class="rounded-lg overflow-hidden h-96 w-full shadow-inner border border-primary/30">
+                            <!-- 🗺️ MAP LOCATION: You can change the 'src' attribute here to point to your actual venue coordinates or place name on Google Maps. -->
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.5855734279786!2d77.21888497551398!3d28.61195608409384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd0033c41031%3A0x336d22d2f782c5f!2sRed%20Fort%2C%20New%20Delhi!5e0!3m2!1sen!2sin!4v1700684000000!5m2!1sen!2sin" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP / Wishes Section -->
+        <section id="rsvp" class="py-16 md:py-24 bg-base jali-bg">
+            <div class="max-w-3xl mx-auto px-4 text-center">
+                <h2 class="font-display text-4xl md:text-5xl text-primary mb-4">Send Us Your Love</h2>
+                <p class="font-body text-lg text-secondary mb-12">Your presence is our greatest gift. Send us your blessings!</p>
+
+                <!-- Wish Form -->
+                <form id="wish-form" class="bg-card p-8 md:p-12 rounded-xl shadow-2xl space-y-6">
+                    <div>
+                        <label for="name" class="block text-left text-sm font-medium text-gray-700">Your Name</label>
+                        <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-primary focus:ring-primary focus:ring-1 transition duration-300">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-left text-sm font-medium text-gray-700">Your Email (Optional)</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-primary focus:ring-primary focus:ring-1 transition duration-300">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-left text-sm font-medium text-gray-700">Your Message / शुभकामना</label>
+                        <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-primary focus:ring-primary focus:ring-1 transition duration-300"></textarea>
+                    </div>
+
+                    <!-- RSVP Fields (Optional, combined for simplicity) -->
+                    <div class="pt-4 border-t border-base">
+                        <label class="block text-left text-sm font-medium text-gray-700 mb-2">Are you attending the Reception?</label>
+                        <div class="flex space-x-6">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="attending" value="yes" class="form-radio text-primary border-primary focus:ring-primary" required>
+                                <span class="ml-2">Yes, with Joy!</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="attending" value="no" class="form-radio text-primary border-primary focus:ring-primary" required>
+                                <span class="ml-2">Cannot Attend</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="guests" class="block text-left text-sm font-medium text-gray-700">Number of Guests (Including You)</label>
+                        <select id="guests" name="guests" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-primary focus:ring-primary focus:ring-1 transition duration-300">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="submit-button" class="w-full bg-primary text-card font-display text-xl py-3 rounded-full shadow-lg hover:bg-primary-dark transition duration-300 transform hover:scale-[1.01]">
+                        Send Blessings
+                    </button>
+                    
+                    <div id="message-box" class="mt-4 p-3 bg-secondary/10 text-secondary rounded-lg hidden"></div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-card py-8 border-t border-card/20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="font-display text-3xl mb-2">With Love,</p>
+            <p class="font-display text-5xl tracking-wider mb-4">Riya & Arjun</p>
+            <div class="flex justify-center space-x-4 mb-4">
+                <a href="#" class="text-card hover:text-secondary transition"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                <a href="#" class="text-card hover:text-secondary transition"><i data-lucide="facebook" class="w-6 h-6"></i></a>
+            </div>
+            <p class="font-body text-sm text-card/80 mt-4">&copy; 2025 Riya & Arjun Wedding. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. Countdown Timer Logic
+        const WEDDING_DATE = new Date("December 25, 2025 10:00:00").getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = WEDDING_DATE - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = '<span class="font-display text-4xl md:text-6xl text-card drop-shadow-xl">We Are Married!</span>';
+                clearInterval(countdownInterval);
+                return;
+            }
+
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Run once immediately
+
+        // 2. Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // 3. Image Carousel Logic
+        let currentSlide = 0;
+        const track = document.getElementById('carousel-track');
+        const slides = track.children;
+        const totalSlides = slides.length;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function moveCarousel(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        let autoPlayInterval;
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(() => {
+                moveCarousel(1);
+            }, 6000); // Change image every 6 seconds
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            startAutoPlay();
+        }
+
+        // Start autoplay when the page loads
+        document.addEventListener('DOMContentLoaded', startAutoPlay);
+
+
+        // 4. RSVP/Wishes Form Submission (Placeholder for now)
+        document.getElementById('wish-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitButton = document.getElementById('submit-button');
+            const messageBox = document.getElementById('message-box');
+            
+            submitButton.innerHTML = 'Sending...';
+            submitButton.disabled = true;
+
+            // Simulate API call delay
+            setTimeout(() => {
+                const name = form.elements['name'].value;
+                
+                messageBox.textContent = `Thank you, ${name}! Your blessings and RSVP have been received with love. We look forward to celebrating with you!`;
+                messageBox.classList.remove('hidden');
+                
+                submitButton.innerHTML = 'Blessings Sent!';
+                submitButton.classList.remove('bg-primary');
+                submitButton.classList.add('bg-secondary');
+                
+                // Clear form after successful submission
+                form.reset();
+                setTimeout(() => {
+                     submitButton.innerHTML = 'Send Blessings';
+                     submitButton.disabled = false;
+                     submitButton.classList.add('bg-primary');
+                     submitButton.classList.remove('bg-secondary');
+                     messageBox.classList.add('hidden');
+                }, 5000);
+                
+            }, 1500); // 1.5 second delay
+        });
+
+    </script>
+</body>
+</html>
